@@ -10,6 +10,15 @@ Given 2 natural numbers, find their greatest common divisor that divides both of
 
 > Time Complexity: O(log min(a, b))
 
+## Graph (Data Structure)
+
+[Preview](Graph.js)  
+Will be used in graph algorithms later on.  
+Assuming each node is connected to at least one other node.  
+Can be direcred/undirecred and/or weighted/unweighted.  
+Using adjacency list.  
+Default graph is direcred & unweighted (weight = 1).
+
 ## License
 
 All algorithms are licensed under the [MIT license](https://opensource.org/licenses/MIT).
