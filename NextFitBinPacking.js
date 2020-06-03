@@ -42,13 +42,13 @@ function nextFitBinPacking(items) {
 // ----------------
 // --- Examples ---
 // ----------------
-let items = [1, 15, 16, 9, 14, 23, 30, 8, 4];
+var items = [1, 15, 16, 9, 14, 23, 30, 8, 4];
 var { bins, didntFitItems } = nextFitBinPacking(items);
 console.log("nextFit([%s]) =", items.join(', '));
 console.log(bins);
 console.log("Didnt Fit Items: ", didntFitItems, '\n');
 
-items = [10, 11, 3, 5, 2, 19, 14, 9, 3];
+var items = [10, 11, 3, 5, 2, 19, 14, 9, 3];
 var { bins, didntFitItems } = nextFitBinPacking(items);
 console.log("nextFit([%s]) =", items.join(', '));
 console.log(bins);
