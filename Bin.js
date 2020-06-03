@@ -7,7 +7,15 @@ class Bin {
   constructor(options = {}) {
     options.capacity = options.hasOwnProperty('capacity') ? options.capacity : 100;
 
+    this.items = [];
     this.capacity = options.capacity;
     this.load = 0;
   }
+
+  addItem(item) {
+    this.items.push(item);
+    this.load += item;
+  }
 }
+
+module.exports = Bin;
