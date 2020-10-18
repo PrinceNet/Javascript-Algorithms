@@ -12,8 +12,6 @@ function binarySearch(items, find) {
   while (l <= r) {
     const m = Math.floor((l + r) / 2);
 
-    console.error(`left: ${l}, right: ${r}, mid: ${m}`);
-
     if (items[m] < find) {
       l = m + 1;
     } else if (items[m] > find) {
