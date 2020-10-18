@@ -29,12 +29,19 @@ To be used in bin packing algorithms.
 [Preview](NextFitBinPacking.js)  
 At any given time there is only 1 open bin that we check.
 It considers the items in an order defined by a list 'items'.
-If an item fits inside the currently considered bin, the item is placed inside it. 
+If an item fits inside the currently considered bin, the item is placed inside it.
 Otherwise, the current bin is closed, a new bin is opened and the current item is placed inside this new bin.
 
 > Time Complexity: O(n) where n = |items|
 
-> Approximation Guarantee: 2*OPT(n) where n = |items|
+> Approximation Guarantee: 2\*OPT(n) where n = |items|
+
+## Binary Search
+
+[Preview](BinarySearch.js)  
+Finds the position (index) of a target value within a sorted array.
+
+> Time Complexity: O(log n) where n = |items|
 
 ## License
 
