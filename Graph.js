@@ -6,32 +6,46 @@
  */
 class Graph {
   // default graph is direcred & unweighted
-  constructor(direcred = true, weighted = false) {
-    this.direcred = direcred;
-    this.weighted = weighted;
+  constructor(options = {}) {
+    options.direcred = options.hasOwnProperty('direcred') ? options.direcred : true;
+    options.weighted = options.hasOwnProperty('weighted') ? options.weighted : false;
+    options.edges = options.hasOwnProperty('edges') ? options.edges : null;
+
+    this.direcred = options.direcred;
+    this.weighted = options.weighted;
     this.adjacencyList = {};
     this.nodes = {};
     this.nodeCount = 0;
+
+    if (Array.isArray(options.edges)) {
+      for (let index = 0; index < options.edges.length; index++) {
+        const edge = options.edges[index];
+
+        this.addEdge(edge);
+      }
+    }
   }
 
   // // when we have weighted graph the weight will be 1 for all edges
-  addEdge(from, to, weight = 1) {
-    weight = this.weighted ? weight : 1;
+  addEdge(edge = {}) {
+    edge.weight = this.weighted && edge.hasOwnProperty('weight') ? edge.weight : 1;
 
-    if (!this.adjacencyList.hasOwnProperty(from)) {
-      this.adjacencyList[from] = {};
+    if (!this.adjacencyList.hasOwnProperty(edge.from)) {
+      this.adjacencyList[edge.from] = {};
     }
-    this.adjacencyList[from][to] = weight;
+
+    this.adjacencyList[edge.from][edge.to] = edge.weight;
 
     if (!this.direcred) {
-      if (!this.adjacencyList.hasOwnProperty(to)) {
-        this.adjacencyList[to] = {};
+      if (!this.adjacencyList.hasOwnProperty(edge.to)) {
+        this.adjacencyList[edge.to] = {};
       }
-      this.adjacencyList[to][from] = weight;
+
+      this.adjacencyList[edge.to][edge.from] = edge.weight;
     }
 
-    this.addNode(from);
-    this.addNode(to);
+    this.addNode(edge.from);
+    this.addNode(edge.to);
   }
 
   addNode(node) {
@@ -46,22 +60,29 @@ class Graph {
 // --- Examples ---
 // ----------------
 
-let graph = new Graph(); // direcred & unweighted
-
-graph.addEdge(1, 2);
-graph.addEdge(2, 3);
-graph.addEdge(2, 4);
-graph.addEdge(3, 4);
-graph.addEdge(4, 1);
+// direcred & unweighted
+let graph = new Graph({
+  edges: [
+    { from: 1, to: 2 },
+    { from: 2, to: 3 },
+    { from: 2, to: 4 },
+    { from: 3, to: 4 },
+    { from: 4, to: 1 },
+  ],
+});
 
 console.log(graph);
 
-graph = new Graph(false, true); // undirecred & weighted
+// undirecred & weighted
+graph = new Graph({
+  direcred: false,
+  weighted: true,
+});
 
-graph.addEdge(1, 2, 6);
-graph.addEdge(2, 3, 15);
-graph.addEdge(2, 4, 8);
-graph.addEdge(3, 4, 3);
-graph.addEdge(4, 1, 9);
+graph.addEdge({ from: 1, to: 2, weight: 6 });
+graph.addEdge({ from: 2, to: 3, weight: 15 });
+graph.addEdge({ from: 2, to: 4, weight: 4 });
+graph.addEdge({ from: 3, to: 4, weight: 3 });
+graph.addEdge({ from: 4, to: 1, weight: 9 });
 
 console.log(graph);
